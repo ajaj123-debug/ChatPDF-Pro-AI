@@ -50,7 +50,7 @@ export default function PdfViewer({
   return (
     <div className="flex flex-col h-full">
       <div
-        className={`flex items-center justify-between px-4 py-2.5 border-b flex-shrink-0 transition-colors duration-300 ${
+        className={`flex flex-wrap items-center justify-between gap-2 px-3 py-2.5 sm:px-4 border-b flex-shrink-0 transition-colors duration-300 ${
           isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-white border-stone-200'
         }`}
       >
@@ -74,7 +74,7 @@ export default function PdfViewer({
               value={pageInput}
               onChange={(e) => setPageInput(e.target.value)}
               placeholder={String(currentPage)}
-              className={`w-10 text-center text-sm rounded-md py-0.5 font-mono focus:outline-none transition-colors ${
+              className={`w-12 text-center text-sm rounded-md py-1 font-mono focus:outline-none transition-colors ${
                 isDark
                   ? 'bg-black border border-zinc-700 text-zinc-100 focus:border-zinc-500 focus:ring-1 focus:ring-zinc-500/40'
                   : 'bg-stone-50 border border-stone-300 text-stone-900 focus:border-stone-500 focus:ring-1 focus:ring-stone-400/30'
@@ -139,7 +139,7 @@ export default function PdfViewer({
       </div>
 
       <div
-        className={`flex-1 overflow-auto flex justify-center py-6 transition-colors duration-300 ${
+        className={`flex-1 overflow-auto flex justify-center px-3 py-4 transition-colors duration-300 sm:px-4 sm:py-6 ${
           isDark ? 'bg-[#050505]' : 'bg-stone-100'
         }`}
       >
@@ -167,8 +167,8 @@ export default function PdfViewer({
           }
           className={
             isDark
-              ? 'rounded-2xl shadow-[0_30px_90px_rgba(0,0,0,0.65)]'
-              : 'rounded-2xl shadow-[0_30px_90px_rgba(24,24,27,0.10)]'
+              ? 'max-w-full rounded-2xl shadow-[0_30px_90px_rgba(0,0,0,0.65)]'
+              : 'max-w-full rounded-2xl shadow-[0_30px_90px_rgba(24,24,27,0.10)]'
           }
         >
           <Page

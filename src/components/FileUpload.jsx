@@ -81,7 +81,7 @@ export default function FileUpload({ onFileSelect, currentFile, onReset, theme =
       onClick={() => inputRef.current?.click()}
       className={`
         relative flex flex-col items-center justify-center gap-3
-        w-full h-48 rounded-2xl border-2 border-dashed cursor-pointer
+        w-full h-40 sm:h-48 rounded-2xl border-2 border-dashed cursor-pointer
         transition-all duration-200 group
         ${
           isDark
@@ -135,7 +135,7 @@ export default function FileUpload({ onFileSelect, currentFile, onReset, theme =
         />
       </div>
 
-      <div className="text-center">
+      <div className="px-4 text-center">
         <p className={`text-sm font-medium ${isDark ? 'text-zinc-100' : 'text-stone-900'}`}>
           {isDragging ? 'Drop your PDF here' : 'Drop PDF here or click to browse'}
         </p>

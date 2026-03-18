@@ -47,7 +47,7 @@ export default function SummaryPanel({
       }`}
     >
       <div
-        className={`flex items-center justify-between px-4 py-3 border-b ${
+        className={`flex items-center justify-between gap-2 px-3 py-3 sm:px-4 border-b ${
           isDark ? 'border-zinc-800' : 'border-stone-200'
         }`}
       >
@@ -69,7 +69,7 @@ export default function SummaryPanel({
         )}
       </div>
 
-      <div className="p-4">
+      <div className="p-3 sm:p-4">
         {!summary && !isSummarizing && (
           <button
             onClick={onAnalyze}

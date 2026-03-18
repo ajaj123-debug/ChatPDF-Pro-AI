@@ -66,7 +66,7 @@ export default function ChatBox({ messages, isLoading, onSend, hasPages, theme =
       }`}
     >
       <div
-        className={`flex items-center gap-2 px-4 py-3 border-b flex-shrink-0 ${
+        className={`flex items-center gap-2 px-3 py-3 sm:px-4 border-b flex-shrink-0 ${
           isDark ? 'border-zinc-800' : 'border-stone-200'
         }`}
       >
@@ -81,7 +81,7 @@ export default function ChatBox({ messages, isLoading, onSend, hasPages, theme =
         )}
       </div>
 
-      <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
+      <div className="flex-1 overflow-y-auto px-3 py-4 space-y-4 sm:px-4">
         {messages.length === 0 ? (
           <EmptyState hasPages={hasPages} theme={theme} />
         ) : (
@@ -145,7 +145,7 @@ export default function ChatBox({ messages, isLoading, onSend, hasPages, theme =
             <Send size={16} />
           </button>
         </form>
-        <p className={`text-xs mt-1.5 px-1 ${isDark ? 'text-zinc-500' : 'text-stone-500'}`}>
+        <p className={`hidden sm:block text-xs mt-1.5 px-1 ${isDark ? 'text-zinc-500' : 'text-stone-500'}`}>
           Press{' '}
           <kbd
             className={`font-mono px-1 rounded ${

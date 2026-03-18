@@ -65,14 +65,14 @@ export default function MessageBubble({ message, onPageJump, theme = 'dark' }) {
     return (
       <div className="flex items-end gap-2.5 flex-row-reverse animate-slide-up">
         <div
-          className={`w-7 h-7 rounded-xl flex items-center justify-center flex-shrink-0 ${
+          className={`hidden sm:flex w-7 h-7 rounded-xl items-center justify-center flex-shrink-0 ${
             isDark ? 'bg-zinc-100' : 'bg-stone-900'
           }`}
         >
           <User size={14} className={isDark ? 'text-black' : 'text-white'} />
         </div>
         <div
-          className={`max-w-[75%] rounded-2xl rounded-br-sm px-4 py-2.5 ${
+          className={`max-w-[88%] sm:max-w-[75%] rounded-2xl rounded-br-sm px-3.5 py-2.5 sm:px-4 ${
             isDark ? 'bg-zinc-100 text-black' : 'bg-stone-900 text-white'
           }`}
         >
@@ -85,11 +85,11 @@ export default function MessageBubble({ message, onPageJump, theme = 'dark' }) {
   if (isError) {
     return (
       <div className="flex items-start gap-2.5 animate-slide-up">
-        <div className="w-7 h-7 rounded-xl bg-red-500 flex items-center justify-center flex-shrink-0">
+        <div className="hidden sm:flex w-7 h-7 rounded-xl bg-red-500 items-center justify-center flex-shrink-0">
           <AlertTriangle size={14} className="text-white" />
         </div>
         <div
-          className={`max-w-[80%] rounded-2xl rounded-bl-sm px-4 py-2.5 border ${
+          className={`max-w-[92%] sm:max-w-[80%] rounded-2xl rounded-bl-sm px-3.5 py-2.5 sm:px-4 border ${
             isDark ? 'bg-red-950/40 border-red-900' : 'bg-red-50 border-red-200'
           }`}
         >
@@ -105,14 +105,14 @@ export default function MessageBubble({ message, onPageJump, theme = 'dark' }) {
   return (
     <div className="flex items-end gap-2.5 animate-slide-up">
       <div
-        className={`w-7 h-7 rounded-xl border flex items-center justify-center flex-shrink-0 ${
+        className={`hidden sm:flex w-7 h-7 rounded-xl border items-center justify-center flex-shrink-0 ${
           isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-stone-100 border-stone-200'
         }`}
       >
         <BookOpen size={14} className={isDark ? 'text-zinc-100' : 'text-stone-900'} />
       </div>
       <div
-        className={`max-w-[80%] rounded-2xl rounded-bl-sm px-4 py-3 border ${
+        className={`max-w-[92%] sm:max-w-[80%] rounded-2xl rounded-bl-sm px-3.5 py-3 sm:px-4 border ${
           isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-white border-stone-200'
         }`}
       >

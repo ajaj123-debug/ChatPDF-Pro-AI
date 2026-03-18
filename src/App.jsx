@@ -18,6 +18,7 @@ export default function App() {
     if (typeof window === 'undefined') return 'dark';
     return window.localStorage.getItem(THEME_STORAGE_KEY) || 'dark';
   });
+  const [activeMobilePanel, setActiveMobilePanel] = useState('document');
 
   const {
     pdfFile,
@@ -60,6 +61,7 @@ export default function App() {
     (file) => {
       clearChat();
       loadPdf(file);
+      setActiveMobilePanel('document');
     },
     [loadPdf, clearChat]
   );
@@ -78,6 +80,7 @@ export default function App() {
     (question) => {
       const context = getContext();
       sendMessage(question, context);
+      setActiveMobilePanel('chat');
     },
     [getContext, sendMessage]
   );
@@ -97,11 +100,11 @@ export default function App() {
       }`}
     >
       <header
-        className={`flex items-center justify-between px-6 py-3.5 border-b flex-shrink-0 backdrop-blur transition-colors duration-300 ${
+        className={`flex items-center justify-between gap-3 px-4 py-3 sm:px-6 sm:py-3.5 border-b flex-shrink-0 backdrop-blur transition-colors duration-300 ${
           isDark ? 'bg-black/95 border-zinc-800' : 'bg-stone-50/95 border-stone-200'
         }`}
       >
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2.5 min-w-0">
           <div
             className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors duration-300 ${
               isDark
@@ -112,7 +115,7 @@ export default function App() {
             <img src={logo} alt="Logo" className="w-6 h-6" />
           </div>
           <span
-            className={`font-display text-lg font-medium tracking-tight ${
+            className={`truncate font-display text-base sm:text-lg font-medium tracking-tight ${
               isDark ? 'text-zinc-100' : 'text-stone-900'
             }`}
           >
@@ -120,10 +123,10 @@ export default function App() {
           </span>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           {isExtracting && (
             <div
-              className={`flex items-center gap-2 text-xs ${
+              className={`hidden sm:flex items-center gap-2 text-xs ${
                 isDark ? 'text-zinc-400' : 'text-stone-500'
               }`}
             >
@@ -152,10 +155,46 @@ export default function App() {
         </div>
       </header>
 
-      <main className="flex flex-1 overflow-hidden">
+      <div
+        className={`px-4 pt-3 md:hidden transition-colors duration-300 ${
+          isDark ? 'bg-[#050505]' : 'bg-stone-100'
+        }`}
+      >
         <div
-          className={`flex flex-col w-1/2 border-r overflow-hidden transition-colors duration-300 ${
-            isDark ? 'border-zinc-800 bg-[#090909]' : 'border-stone-200 bg-stone-50'
+          className={`grid grid-cols-2 rounded-2xl border p-1 ${
+            isDark ? 'border-zinc-800 bg-zinc-950' : 'border-stone-200 bg-white'
+          }`}
+        >
+          {['document', 'chat'].map((panel) => {
+            const isActive = activeMobilePanel === panel;
+            return (
+              <button
+                key={panel}
+                type="button"
+                onClick={() => setActiveMobilePanel(panel)}
+                className={`rounded-xl px-3 py-2 text-sm font-medium capitalize transition-colors ${
+                  isActive
+                    ? isDark
+                      ? 'bg-zinc-100 text-black'
+                      : 'bg-stone-900 text-white'
+                    : isDark
+                      ? 'text-zinc-400'
+                      : 'text-stone-500'
+                }`}
+              >
+                {panel}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <main className="flex flex-1 flex-col overflow-hidden md:flex-row">
+        <div
+          className={`${
+            activeMobilePanel === 'document' ? 'flex' : 'hidden'
+          } flex-col w-full overflow-hidden transition-colors duration-300 md:flex md:w-1/2 md:border-r ${
+            isDark ? 'md:border-zinc-800 bg-[#090909]' : 'md:border-stone-200 bg-stone-50'
           }`}
         >
           <div className="px-4 pt-4 pb-3 flex-shrink-0">
@@ -205,7 +244,9 @@ export default function App() {
         </div>
 
         <div
-          className={`flex flex-col w-1/2 overflow-hidden transition-colors duration-300 ${
+          className={`${
+            activeMobilePanel === 'chat' ? 'flex' : 'hidden'
+          } flex-col w-full overflow-hidden transition-colors duration-300 md:flex md:w-1/2 ${
             isDark ? 'bg-[#050505]' : 'bg-stone-100'
           }`}
         >
