@@ -6,15 +6,9 @@
 
 import { BookOpen, User, AlertTriangle } from 'lucide-react';
 
-/**
- * Replaces "Page X" mentions in text with clickable badge elements.
- * @param {string} text
- * @param {function} onPageJump
- */
 function renderWithPageCitations(text, onPageJump) {
   if (!onPageJump) return text;
 
-  // Split on page references to inject interactive badges
   const parts = text.split(/(\bPages?\s+\d+(?:\s*(?:and|,|&)\s*\d+)*\b)/gi);
 
   return parts.map((part, idx) => {
@@ -41,14 +35,24 @@ function renderWithPageCitations(text, onPageJump) {
   });
 }
 
-export function TypingIndicator() {
+export function TypingIndicator({ theme = 'dark' }) {
+  const isDark = theme === 'dark';
+
   return (
     <div className="flex items-end gap-2.5 animate-fade-in">
-      <div className="w-7 h-7 rounded-xl bg-sage-500 flex items-center justify-center flex-shrink-0">
-        <BookOpen size={14} className="text-paper-50" />
+      <div
+        className={`w-7 h-7 rounded-xl flex items-center justify-center flex-shrink-0 ${
+          isDark ? 'bg-zinc-100' : 'bg-stone-900'
+        }`}
+      >
+        <BookOpen size={14} className={isDark ? 'text-black' : 'text-white'} />
       </div>
-      <div className="bg-paper-200 border border-ink-200 rounded-2xl rounded-bl-sm px-4 py-3">
-        <div className="flex gap-1 items-center h-4">
+      <div
+        className={`rounded-2xl rounded-bl-sm px-4 py-3 border ${
+          isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-white border-stone-200'
+        }`}
+      >
+        <div className={`flex gap-1 items-center h-4 ${isDark ? 'theme-dark' : 'theme-light'}`}>
           <span className="typing-dot" />
           <span className="typing-dot" />
           <span className="typing-dot" />
@@ -58,17 +62,26 @@ export function TypingIndicator() {
   );
 }
 
-export default function MessageBubble({ message, onPageJump }) {
+export default function MessageBubble({ message, onPageJump, theme = 'dark' }) {
   const isUser = message.role === 'user';
   const isError = message.role === 'error';
+  const isDark = theme === 'dark';
 
   if (isUser) {
     return (
       <div className="flex items-end gap-2.5 flex-row-reverse animate-slide-up">
-        <div className="w-7 h-7 rounded-xl bg-accent-500 flex items-center justify-center flex-shrink-0">
-          <User size={14} className="text-paper-50" />
+        <div
+          className={`w-7 h-7 rounded-xl flex items-center justify-center flex-shrink-0 ${
+            isDark ? 'bg-zinc-100' : 'bg-stone-900'
+          }`}
+        >
+          <User size={14} className={isDark ? 'text-black' : 'text-white'} />
         </div>
-        <div className="max-w-[75%] bg-accent-500 text-paper-50 rounded-2xl rounded-br-sm px-4 py-2.5">
+        <div
+          className={`max-w-[75%] rounded-2xl rounded-br-sm px-4 py-2.5 ${
+            isDark ? 'bg-zinc-100 text-black' : 'bg-stone-900 text-white'
+          }`}
+        >
           <p className="text-sm leading-relaxed">{message.content}</p>
         </div>
       </div>
@@ -78,30 +91,45 @@ export default function MessageBubble({ message, onPageJump }) {
   if (isError) {
     return (
       <div className="flex items-start gap-2.5 animate-slide-up">
-        <div className="w-7 h-7 rounded-xl bg-red-400 flex items-center justify-center flex-shrink-0">
+        <div className="w-7 h-7 rounded-xl bg-red-500 flex items-center justify-center flex-shrink-0">
           <AlertTriangle size={14} className="text-white" />
         </div>
-        <div className="max-w-[80%] bg-red-50 border border-red-200 rounded-2xl rounded-bl-sm px-4 py-2.5">
-          <p className="text-xs font-semibold text-red-600 mb-0.5">Error</p>
-          <p className="text-sm text-red-700 leading-relaxed">{message.content}</p>
+        <div
+          className={`max-w-[80%] rounded-2xl rounded-bl-sm px-4 py-2.5 border ${
+            isDark ? 'bg-red-950/40 border-red-900' : 'bg-red-50 border-red-200'
+          }`}
+        >
+          <p className={`text-xs font-semibold mb-0.5 ${isDark ? 'text-red-300' : 'text-red-700'}`}>Error</p>
+          <p className={`text-sm leading-relaxed ${isDark ? 'text-red-200' : 'text-red-600'}`}>
+            {message.content}
+          </p>
         </div>
       </div>
     );
   }
 
-  // Assistant message
   return (
     <div className="flex items-end gap-2.5 animate-slide-up">
-      <div className="w-7 h-7 rounded-xl bg-sage-500 flex items-center justify-center flex-shrink-0">
-        <BookOpen size={14} className="text-paper-50" />
+      <div
+        className={`w-7 h-7 rounded-xl border flex items-center justify-center flex-shrink-0 ${
+          isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-stone-100 border-stone-200'
+        }`}
+      >
+        <BookOpen size={14} className={isDark ? 'text-zinc-100' : 'text-stone-900'} />
       </div>
-      <div className="max-w-[80%] bg-paper-200 border border-ink-200 rounded-2xl rounded-bl-sm px-4 py-3">
-        <p className="text-sm text-ink-700 leading-relaxed ai-prose">
+      <div
+        className={`max-w-[80%] rounded-2xl rounded-bl-sm px-4 py-3 border ${
+          isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-white border-stone-200'
+        }`}
+      >
+        <p className={`text-sm leading-relaxed ai-prose ${isDark ? 'text-zinc-200' : 'text-stone-700'}`}>
           {renderWithPageCitations(message.content, onPageJump)}
         </p>
         {message.pages?.length > 0 && (
-          <div className="mt-2 pt-2 border-t border-ink-200 flex flex-wrap gap-1">
-            <span className="text-xs text-ink-400 font-medium">Referenced:</span>
+          <div className={`mt-2 pt-2 border-t flex flex-wrap gap-1 ${isDark ? 'border-zinc-800' : 'border-stone-200'}`}>
+            <span className={`text-xs font-medium ${isDark ? 'text-zinc-500' : 'text-stone-500'}`}>
+              Referenced:
+            </span>
             {message.pages.map((p) => (
               <button
                 key={p}
