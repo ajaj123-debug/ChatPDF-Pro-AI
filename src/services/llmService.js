@@ -56,6 +56,40 @@ ${trimmed}`;
   return generateContent(prompt);
 }
 
+function parseSuggestedQuestions(text) {
+  return text
+    .split('\n')
+    .map((line) => line.replace(/^[\s\u2022\-*\d.)]+/, '').trim())
+    .filter(Boolean)
+    .filter((line) => line.endsWith('?'))
+    .slice(0, 5);
+}
+
+/**
+ * Generate likely user questions for the loaded PDF.
+ * @param {string} fullText - The entire extracted PDF text.
+ * @returns {Promise<string[]>} Suggested questions.
+ */
+export async function suggestQuestions(fullText) {
+  const trimmed = fullText.slice(0, 60_000);
+  const prompt = `You are helping users explore a PDF inside a chat app.
+
+Generate 4 short, useful questions a user is most likely to ask about this document.
+
+Rules:
+- Return ONLY the questions
+- One question per line
+- Keep each question under 14 words
+- Make them specific to the document
+- Each line must end with a question mark
+
+Document:
+${trimmed}`;
+
+  const result = await generateContent(prompt);
+  return parseSuggestedQuestions(result);
+}
+
 /**
  * Answer a question using page-aware document context.
  * @param {string} context - Formatted "Page N: ..." string.

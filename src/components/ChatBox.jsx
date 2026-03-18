@@ -28,7 +28,15 @@ function EmptyState({ hasPages, theme }) {
   );
 }
 
-export default function ChatBox({ messages, isLoading, onSend, hasPages, theme = 'dark' }) {
+export default function ChatBox({
+  messages,
+  isLoading,
+  onSend,
+  hasPages,
+  suggestedQuestions = [],
+  isGeneratingSuggestions = false,
+  theme = 'dark',
+}) {
   const [input, setInput] = useState('');
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
@@ -56,6 +64,11 @@ export default function ChatBox({ messages, isLoading, onSend, hasPages, theme =
   };
 
   const canSend = input.trim().length > 0 && !isLoading && hasPages;
+
+  const fillInput = useCallback((question) => {
+    setInput(question);
+    inputRef.current?.focus();
+  }, []);
 
   return (
     <div
@@ -103,6 +116,38 @@ export default function ChatBox({ messages, isLoading, onSend, hasPages, theme =
       </div>
 
       <div className={`flex-shrink-0 border-t p-3 ${isDark ? 'border-zinc-800' : 'border-stone-200'}`}>
+        {hasPages && (
+          <div className="mb-3">
+            <div className="mb-2 flex items-center justify-between gap-2">
+              <p className={`text-xs font-medium ${isDark ? 'text-zinc-400' : 'text-stone-500'}`}>
+                Suggested questions
+              </p>
+              {isGeneratingSuggestions && (
+                <span className={`text-[11px] ${isDark ? 'text-zinc-500' : 'text-stone-400'}`}>
+                  Generating...
+                </span>
+              )}
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              {suggestedQuestions.map((question) => (
+                <button
+                  key={question}
+                  type="button"
+                  onClick={() => fillInput(question)}
+                  className={`rounded-full border px-3 py-1.5 text-left text-xs transition-colors ${
+                    isDark
+                      ? 'border-zinc-800 bg-black text-zinc-300 hover:border-zinc-600 hover:bg-zinc-900 hover:text-zinc-100'
+                      : 'border-stone-300 bg-stone-50 text-stone-700 hover:border-stone-500 hover:bg-white hover:text-stone-900'
+                  }`}
+                >
+                  {question}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
         <form onSubmit={handleSubmit} className="flex items-end gap-2">
           <textarea
             ref={inputRef}

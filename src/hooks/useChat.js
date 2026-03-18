@@ -1,11 +1,21 @@
 import { useState, useCallback, useRef } from 'react';
-import { answerQuestion, summarizeDocument } from '../services/llmService';
+import {
+  answerQuestion,
+  summarizeDocument,
+  suggestQuestions,
+} from '../services/llmService';
 import { extractPageNumbers } from '../utils/extractText';
 
 /** @typedef {{ id: string, role: 'user'|'assistant'|'error', content: string, pages?: number[] }} Message */
 
 let msgIdCounter = 0;
 const uid = () => `msg_${++msgIdCounter}_${Date.now()}`;
+const fallbackSuggestions = [
+  'What is this document mainly about?',
+  'What are the key points in this PDF?',
+  'Are there any important deadlines or dates?',
+  'What action items or requirements are mentioned?',
+];
 
 export function useChat() {
   const [messages, setMessages] = useState([]);
@@ -13,6 +23,8 @@ export function useChat() {
   const [summary, setSummary] = useState(null);
   const [isSummarizing, setIsSummarizing] = useState(false);
   const [summaryError, setSummaryError] = useState(null);
+  const [suggestedQuestions, setSuggestedQuestions] = useState([]);
+  const [isGeneratingSuggestions, setIsGeneratingSuggestions] = useState(false);
   const abortRef = useRef(null);
 
   const addMessage = useCallback((role, content, extra = {}) => {
@@ -68,10 +80,27 @@ export function useChat() {
     }
   }, [isSummarizing]);
 
+  const generateSuggestedQuestions = useCallback(async (fullText) => {
+    if (!fullText.trim() || isGeneratingSuggestions) return;
+
+    setIsGeneratingSuggestions(true);
+
+    try {
+      const result = await suggestQuestions(fullText);
+      setSuggestedQuestions(result.length ? result : fallbackSuggestions);
+    } catch (err) {
+      setSuggestedQuestions(fallbackSuggestions);
+    } finally {
+      setIsGeneratingSuggestions(false);
+    }
+  }, [isGeneratingSuggestions]);
+
   const clearChat = useCallback(() => {
     setMessages([]);
     setSummary(null);
     setSummaryError(null);
+    setSuggestedQuestions([]);
+    setIsGeneratingSuggestions(false);
   }, []);
 
   return {
@@ -80,8 +109,11 @@ export function useChat() {
     summary,
     isSummarizing,
     summaryError,
+    suggestedQuestions,
+    isGeneratingSuggestions,
     sendMessage,
     generateSummary,
+    generateSuggestedQuestions,
     clearChat,
   };
 }

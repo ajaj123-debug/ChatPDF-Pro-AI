@@ -41,8 +41,11 @@ export default function App() {
     summary,
     isSummarizing,
     summaryError,
+    suggestedQuestions,
+    isGeneratingSuggestions,
     sendMessage,
     generateSummary,
+    generateSuggestedQuestions,
     clearChat,
   } = useChat();
 
@@ -56,6 +59,18 @@ export default function App() {
     window.addEventListener('pdf-jump-page', handler);
     return () => window.removeEventListener('pdf-jump-page', handler);
   }, [goToPage]);
+
+  useEffect(() => {
+    if (!pages.length || suggestedQuestions.length || isGeneratingSuggestions) return;
+    const text = getFullText();
+    if (text) generateSuggestedQuestions(text);
+  }, [
+    pages,
+    suggestedQuestions.length,
+    isGeneratingSuggestions,
+    getFullText,
+    generateSuggestedQuestions,
+  ]);
 
   const handleFileSelect = useCallback(
     (file) => {
@@ -270,6 +285,8 @@ export default function App() {
                 isLoading={isLoading}
                 onSend={handleSend}
                 hasPages={hasPages}
+                suggestedQuestions={suggestedQuestions}
+                isGeneratingSuggestions={isGeneratingSuggestions}
                 theme={theme}
               />
             </div>
