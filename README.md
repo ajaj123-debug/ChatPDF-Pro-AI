@@ -91,7 +91,6 @@ src/
 - **No backend** - everything runs in the browser
 - **No database or vector store** - full PDF text is sent to the LLM each query
 - **PDF size** - works best with PDFs under ~50 pages; very large documents may hit Gemini token limits
-- **No Over Engineered** - As directed in the PDF
 
 ---
 
@@ -109,3 +108,4 @@ npm run preview
 - The app uses **Gemini 2.5 Flash** for fast, cost-effective responses.
 - Text is extracted client-side; no PDF content is sent to any server other than the Gemini API.
 - Scanned PDFs (image-only) will extract no text — use a PDF with a text layer.
+- I've built this project as a frontend-focused RAG demonstration. It assumes the PDF content fits within the LLM context window and does not use vector databases or backend services as per the direction from attached PDF in email
