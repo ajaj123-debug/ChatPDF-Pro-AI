@@ -1,10 +1,3 @@
-/**
- * App.jsx
- * Root component — orchestrates the split-panel layout.
- * Left panel: PDF Upload + Viewer
- * Right panel: Summary + Chat
- */
-
 import { useEffect, useCallback } from 'react';
 import { BookOpen } from 'lucide-react';
 
