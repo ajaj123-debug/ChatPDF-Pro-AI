@@ -85,7 +85,6 @@ export default function App() {
           <span className="font-display text-lg font-medium text-paper-100 tracking-tight">
             ChatPDF Pro AI
           </span>
-          <span className="text-ink-500 text-xs font-mono mt-0.5">v1.0</span>
         </div>
 
         <div className="flex items-center gap-3">
