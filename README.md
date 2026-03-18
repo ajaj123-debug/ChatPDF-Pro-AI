@@ -1,16 +1,16 @@
 # Chat with your PDF
 
-A production-quality, frontend-only React application that lets you upload a PDF, view it, generate an AI-powered summary, and ask questions with page-level citations — all without a backend.
+A production-quality, frontend-only React application that lets you upload a PDF, view it, generate an AI-powered summary, and ask questions with page-level citations, all without a backend.
 
 ---
 
 ## Features
 
-- **PDF Upload & Preview** — Drag-and-drop or click to upload. Rendered with `react-pdf` with zoom and page navigation.
-- **Text Extraction** — Full per-page text extraction via `pdfjs-dist`.
-- **AI Summary** — One-click 5–7 bullet point summary via Gemini.
-- **Smart Q&A** — Ask anything about the document; the AI cites exact page numbers.
-- **Page Jump** — Click any page citation in a chat response to jump directly to that page in the viewer.
+- **PDF Upload & Preview** - Drag-and-drop or click to upload. Rendered with `react-pdf` with zoom and page navigation.
+- **Text Extraction** - Full per-page text extraction via `pdfjs-dist`.
+- **AI Summary** - One-click 5–7 bullet point summary via Gemini.
+- **Smart Q&A** - Ask anything about the document; the AI cites exact page numbers.
+- **Page Jump** - Click any page citation in a chat response to jump directly to that page in the viewer.
 
 ---
 
@@ -88,9 +88,10 @@ src/
 
 ## Constraints
 
-- **No backend** — everything runs in the browser
-- **No database or vector store** — full PDF text is sent to the LLM each query
-- **PDF size** — works best with PDFs under ~50 pages; very large documents may hit Gemini token limits
+- **No backend** - everything runs in the browser
+- **No database or vector store** - full PDF text is sent to the LLM each query
+- **PDF size** - works best with PDFs under ~50 pages; very large documents may hit Gemini token limits
+- **No Over Engineered** - As directed in the PDF
 
 ---
 
@@ -105,6 +106,6 @@ npm run preview
 
 ## Notes
 
-- The app uses **Gemini 1.5 Flash** for fast, cost-effective responses.
+- The app uses **Gemini 2.5 Flash** for fast, cost-effective responses.
 - Text is extracted client-side; no PDF content is sent to any server other than the Gemini API.
 - Scanned PDFs (image-only) will extract no text — use a PDF with a text layer.
