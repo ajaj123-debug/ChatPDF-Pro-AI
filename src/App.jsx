@@ -6,7 +6,9 @@
  */
 
 import { useEffect, useCallback } from 'react';
-import { BookOpen, Github } from 'lucide-react';
+import { BookOpen } from 'lucide-react';
+
+import logo from './assets/final_logo.png';
 
 import FileUpload from './components/FileUpload';
 import PdfViewer from './components/PdfViewer';
@@ -85,7 +87,7 @@ export default function App() {
       <header className="flex items-center justify-between px-6 py-3.5 bg-ink-900 border-b border-ink-800 flex-shrink-0">
         <div className="flex items-center gap-2.5">
           <div className="w-8 h-8 rounded-lg bg-accent-500 flex items-center justify-center">
-            <BookOpen size={16} className="text-ink-950" />
+            <img src={logo} alt="Logo" className="w-6 h-6" />
           </div>
           <span className="font-display text-lg font-medium text-paper-100 tracking-tight">
             ChatPDF Pro AI
