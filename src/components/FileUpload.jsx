@@ -1,8 +1,3 @@
-/**
- * FileUpload.jsx
- * Drag-and-drop / click-to-upload PDF file picker.
- */
-
 import { useRef, useState, useCallback } from 'react';
 import { Upload, FileText, X } from 'lucide-react';
 

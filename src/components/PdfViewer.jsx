@@ -1,9 +1,3 @@
-/**
- * PdfViewer.jsx
- * Renders the PDF using react-pdf with page navigation controls.
- * Exposes page jump via currentPage prop.
- */
-
 import { useState, useCallback } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/Page/AnnotationLayer.css';

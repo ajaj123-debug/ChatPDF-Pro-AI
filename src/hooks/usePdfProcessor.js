@@ -1,8 +1,3 @@
-/**
- * usePdfProcessor.js
- * Manages PDF file state, text extraction, and current page navigation.
- */
-
 import { useState, useCallback } from 'react';
 import { extractTextFromPDF, buildPageContext } from '../utils/extractText';
 

@@ -1,9 +1,3 @@
-/**
- * useChat.js
- * Manages chat message history, sending questions to the LLM,
- * and document summarization.
- */
-
 import { useState, useCallback, useRef } from 'react';
 import { answerQuestion, summarizeDocument } from '../services/llmService';
 import { extractPageNumbers } from '../utils/extractText';

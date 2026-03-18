@@ -1,8 +1,3 @@
-/**
- * SummaryPanel.jsx
- * Displays the Analyze button and the resulting document summary.
- */
-
 import { Sparkles, AlertCircle, ChevronDown, ChevronUp } from 'lucide-react';
 import { useState } from 'react';
 

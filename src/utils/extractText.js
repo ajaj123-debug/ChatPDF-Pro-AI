@@ -1,9 +1,3 @@
-/**
- * extractText.js
- * Extracts per-page text from a PDF File object using pdfjs-dist.
- * Returns structured page data and a joined fullText string.
- */
-
 import * as pdfjsLib from 'pdfjs-dist';
 
 // Configure the worker — Vite will handle the URL resolution

@@ -1,9 +1,3 @@
-/**
- * MessageBubble.jsx
- * Renders a single chat message with role-based styling.
- * For assistant messages, clickable page citations are rendered inline.
- */
-
 import { BookOpen, User, AlertTriangle } from 'lucide-react';
 
 function renderWithPageCitations(text, onPageJump) {

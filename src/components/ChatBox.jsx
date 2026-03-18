@@ -1,8 +1,3 @@
-/**
- * ChatBox.jsx
- * The main chat interface: message list + input form.
- */
-
 import { useRef, useEffect, useState, useCallback } from 'react';
 import { Send, MessageSquare } from 'lucide-react';
 import MessageBubble, { TypingIndicator } from './MessageBubble';
