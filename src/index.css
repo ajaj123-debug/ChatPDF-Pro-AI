@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: 'DM Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    margin: 0;
+    background-color: #f5f2e6;
+    color: #2c2819;
+    min-height: 100vh;
+  }
+
+  :root {
+    --scrollbar-thumb: #c4c0aa;
+    --scrollbar-track: transparent;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #a9a384;
+  }
+}
+
+@layer components {
+  /* PDF viewer canvas override */
+  .react-pdf__Page__canvas {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  .react-pdf__Page {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Typing indicator dots */
+  .typing-dot {
+    @apply w-2 h-2 rounded-full bg-ink-400;
+    animation: pulseDot 1.4s ease-in-out infinite;
+  }
+  .typing-dot:nth-child(1) { animation-delay: 0s; }
+  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+  /* Shimmer loading */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      #e5e1c4 25%,
+      #f5f2e6 50%,
+      #e5e1c4 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  /* Page citation badge */
+  .page-badge {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-mono font-medium 
+           bg-accent-500 text-paper-50 cursor-pointer hover:bg-accent-600 
+           transition-colors duration-150 ml-1;
+  }
+
+  /* Prose styling for AI responses */
+  .ai-prose p { @apply mb-2 last:mb-0; }
+  .ai-prose ul { @apply list-disc list-inside space-y-1 my-2; }
+  .ai-prose li { @apply text-sm; }
+  .ai-prose strong { @apply font-semibold text-ink-800; }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
