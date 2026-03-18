@@ -19,7 +19,7 @@ A production-quality, frontend-only React application that lets you upload a PDF
 ### 1. Clone & Install
 
 ```bash
-git clone <https://github.com/ajaj123-debug/ChatPDF-Pro-AI>
+git clone https://github.com/ajaj123-debug/ChatPDF-Pro-AI
 npm install
 ```
 
