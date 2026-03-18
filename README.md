@@ -57,7 +57,7 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 | Styling | Tailwind CSS |
 | PDF Rendering | react-pdf |
 | Text Extraction | pdfjs-dist |
-| AI / LLM | Google Gemini 1.5 Flash |
+| AI / LLM | Google Gemini 2.5 flash |
 | Icons | lucide-react |
 
 ---
