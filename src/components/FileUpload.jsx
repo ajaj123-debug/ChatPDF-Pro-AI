@@ -26,6 +26,7 @@ export default function FileUpload({ onFileSelect, currentFile, onReset, theme =
   );
 
   const handleDragOver = (e) => {
+    
     e.preventDefault();
     setIsDragging(true);
   };
