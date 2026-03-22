@@ -33,6 +33,8 @@ export default function FileUpload({ onFileSelect, currentFile, onReset, theme =
 
   const handleDragLeave = () => setIsDragging(false);
 
+  
+
   const handleChange = (e) => handleFile(e.target.files?.[0]);
 
   if (currentFile) {
