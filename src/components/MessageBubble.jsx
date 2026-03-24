@@ -29,6 +29,8 @@ function renderWithPageCitations(text, onPageJump) {
   });
 }
 
+
+
 export function TypingIndicator({ theme = 'dark' }) {
   const isDark = theme === 'dark';
 
