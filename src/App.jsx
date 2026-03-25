@@ -225,6 +225,7 @@ export default function App() {
               <PdfViewer
                 pdfUrl={pdfUrl}
                 currentPage={currentPage}
+                
                 pageCount={pageCount}
                 onPageChange={goToPage}
                 theme={theme}
