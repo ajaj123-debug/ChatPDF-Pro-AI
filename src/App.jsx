@@ -1,15 +1,14 @@
 import { useEffect, useCallback, useState } from 'react';
 import { BookOpen, Moon, Sun } from 'lucide-react';
-
 import logo from './assets/final_logo.png';
-
 import FileUpload from './components/FileUpload';
 import PdfViewer from './components/PdfViewer';
 import SummaryPanel from './components/SummaryPanel';
 import ChatBox from './components/ChatBox';
-
 import { usePdfProcessor } from './hooks/usePdfProcessor';
 import { useChat } from './hooks/useChat';
+
+
 
 const THEME_STORAGE_KEY = 'chatpdf-theme';
 
