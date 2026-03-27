@@ -204,6 +204,7 @@ export default function App() {
       </div>
 
       <main className="flex flex-1 flex-col overflow-hidden md:flex-row">
+        
         <div
           className={`${
             activeMobilePanel === 'document' ? 'flex' : 'hidden'
